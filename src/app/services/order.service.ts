@@ -26,7 +26,7 @@ export class OrderService {
     return obs;
   }
 
-  publisOrders(load: lumpsum) {
+  publishOrders(load: lumpsum) {
     let obs = new Observable<boolean>((observer) => {
       this.http
         .post<boolean>('/order/lumpsum', load, { observe: 'response' })

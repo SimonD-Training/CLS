@@ -1,1 +1,117 @@
-//Kenny and Romario here
+<div
+  *ngIf="warningMsg"
+  class="flex items-center w-full max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800 absolute bottom-5 right-5"
+  role="alert"
+>
+  <div
+    class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-orange-500 bg-orange-100 rounded-lg dark:bg-orange-700 dark:text-orange-200"
+  >
+    <svg
+      class="w-5 h-5"
+      fill="currentColor"
+      viewBox="0 0 20 20"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        fill-rule="evenodd"
+        d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
+        clip-rule="evenodd"
+      ></path>
+    </svg>
+  </div>
+  <div class="ml-3 text-sm font-normal">{{ warningMsg }}</div>
+</div>
+<div
+  *ngIf="successMsg"
+  class="flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800 absolute bottom-5 right-5"
+  role="alert"
+>
+  <div
+    class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg dark:bg-green-800 dark:text-green-200"
+  >
+    <svg
+      class="w-5 h-5"
+      fill="currentColor"
+      viewBox="0 0 20 20"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        fill-rule="evenodd"
+        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+        clip-rule="evenodd"
+      ></path>
+    </svg>
+  </div>
+  <div class="ml-3 text-sm font-normal">{{ successMsg }}</div>
+</div>
+<div class="flex justify-center">
+  <div class="w-3/5">
+    <!-- HEADER -->
+    <div>
+      <h1 class="text-white text-4xl font-extrabold my-10">
+        Cafeteria Lunch System
+      </h1>
+    </div>
+
+    <!-- TRAINEE FORM -->
+    <div class="grid grid-cols-2 gap-10">
+      <div>
+        <form
+          #form="ngForm"
+          action=""
+          class="grid grid-flow-row gap-5 bg-gray-50 rounded-md p-5"
+        >
+          <h2 class="text-10xl font-bold">Trainee Information Form</h2>
+          <label class="text-sm">First Name:</label>
+          <input class="text-sm border border-black" name="fname" type="text" required ngModel />
+          <label class="text-sm">Last Name:</label>
+          <input class="text-sm border border-black" name="lname" type="text" required ngModel />
+          <button
+            class="text-sm bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded"
+            (click)="form.invalid || confirmName(form)"
+          >
+            Confirm
+          </button>
+        </form>
+      </div>
+
+      <!-- ORDER FORM -->
+      <form
+        #form2="ngForm"
+        class="grid grid-flow-row gap-5 bg-gray-50 rounded-md p-5"
+      >
+        <h2 class="text-1xl font-bold">Order Information Form</h2>
+        <label class="text-sm">Main Course</label>
+        <select *ngIf="Menu1" name="option1" class="text-sm w-3/4 border border-black" required ngModel>
+          <option *ngFor="let item of Menu1" [value]="item.id">
+            {{ item.option_nm }}
+          </option>
+        </select>
+        <label class="text-sm">Side Dish</label>
+        <select *ngIf="Menu2" name="option2" class="text-sm w-3/4 border border-black" required ngModel>
+          <option *ngFor="let item of Menu2" [value]="item.id">
+            {{ item.option_nm }}
+          </option>
+        </select>
+        <label class="text-sm">Side Dish 2</label>
+        <select *ngIf="Menu3" name="option3" class="text-sm w-3/4 border border-black" required ngModel>
+          <option *ngFor="let item of Menu3" [value]="item.id">
+            {{ item.option_nm }}
+          </option>
+        </select>
+        <label class="text-sm">Beverage</label>
+        <select *ngIf="Menu4" name="option4" class="text-sm w-3/4 border border-black" required ngModel>
+          <option *ngFor="let item of Menu4" [value]="item.id">
+            {{ item.option_nm }}
+          </option>
+        </select>
+        <button
+          class="text-sm bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded"
+          (click)="form.invalid || form2.invalid || submitOrder(form2)"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

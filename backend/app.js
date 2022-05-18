@@ -1,11 +1,9 @@
 const express = require("express");
-const body_parser = require("body-parser");
 const dotenv = require("dotenv");
 
 dotenv.config();
 
 const app = express();
-app.use(body_parser.json());
 const port = process.env.PORT || 8000;
 app.listen(port, () => console.log(`Listening on port: ${port}..`));
 
