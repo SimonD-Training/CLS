@@ -36,6 +36,7 @@ export class OrderService {
           },
           error: (err) => {
             console.error(err);
+            observer.next(false);
           },
         });
     });

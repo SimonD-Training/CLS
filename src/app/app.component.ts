@@ -92,7 +92,7 @@ export class AppComponent implements OnInit {
           }, 3000);
         } else {
           this.warnlock = true;
-          this.warningMsg = this.fname && this.lname ? 'Order Failed' : 'Unnamed Trainee';
+          this.warningMsg = this.fname && this.lname ? 'Order Failed' : 'Valid name not submitted';
           setTimeout(() => {
             this.warningMsg = null;
             this.warnlock = false;

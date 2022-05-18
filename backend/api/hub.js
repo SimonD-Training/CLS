@@ -31,20 +31,34 @@ router.post("/order/lumpsum", (req, res) => {
       else {
         if (rows.length == 1) {
           let trainee_id = rows[0].id;
-          [...orders].forEach((c) => {
-            database.query(
-              `INSERT INTO lunch (meal_option_id, trainee_id, date) VALUES (${
-                c.meal_option_id
-              }, ${trainee_id}, '${new Date().toISOString().slice(0,10)}')`,
-              (err2, rows2) => {
-                if (err2) {
-                  console.log(err2);
-                  flag = false;
+          database.query(
+            `SELECT * FROM lunch WHERE trainee_id = ${trainee_id}`,
+            (err, rows) => {
+              if (err) res.sendStatus(500);
+              else {
+                if (rows.length > 0) {
+                  res.status(418).send(false);
+                } else {
+                  [...orders].forEach((c) => {
+                    database.query(
+                      `INSERT INTO lunch (meal_option_id, trainee_id, date) VALUES (${
+                        c.meal_option_id
+                      }, ${trainee_id}, '${new Date()
+                        .toISOString()
+                        .slice(0, 10)}')`,
+                      (err2, rows2) => {
+                        if (err2) {
+                          console.log(err2);
+                          flag = false;
+                        }
+                      }
+                    );
+                  });
+                  res.status(flag ? 200 : 409).send(flag);
                 }
               }
-            );
-          });
-          res.status(flag ? 200 : 409).send(flag);
+            }
+          );
         } else res.status(404).send(false);
       }
     }

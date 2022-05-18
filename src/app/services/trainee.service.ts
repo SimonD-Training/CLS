@@ -18,8 +18,9 @@ export class TraineeService {
           next: (data) => {
             observer.next(data.body!);
           },
-          error: (err) => {
+          error: (err) => {            
             console.error(err);
+            observer.next(false);
           },
         });
     });
