@@ -50,6 +50,7 @@ export class AppComponent implements OnInit {
       .checkTrainee({ fname: fname.value, lname: lname.value })
       .subscribe((data) => {
         if (data) {
+          form.reset();
           this.fname = fname.value;
           this.lname = lname.value;
           this.successlock = true;
@@ -84,6 +85,7 @@ export class AppComponent implements OnInit {
       })
       .subscribe((data) => {
         if (data && !this.successlock) {
+          form.reset();
           this.successlock = true;
           this.successMsg = 'Order Successful!';
           setTimeout(() => {

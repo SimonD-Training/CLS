@@ -46,7 +46,7 @@ router.post("/order/lumpsum", (req, res) => {
                       }, ${trainee_id}, '${new Date()
                         .toISOString()
                         .slice(0, 10)}')`,
-                      (err2, rows2) => {
+                      (err2) => {
                         if (err2) {
                           console.log(err2);
                           flag = false;
