@@ -5,15 +5,15 @@ const body_parser = require("body-parser");
 const router = Router();
 router.use(body_parser.json());
 
-router.post("/get/menu", (req, res) => {
+router.get("/api/menu", (req, res) => {
   database.query(`SELECT * FROM meal_options`, (err, rows) => {
     if (err) res.sendStatus(500);
     else res.status(200).send(rows);
   });
 });
-router.post("/get/trainee", (req, res) => {
+router.get("/api/trainee?*", (req, res) => {
   database.query(
-    `SELECT * FROM trainees WHERE fname = '${req.body.fname}' AND lname = '${req.body.lname}'`,
+    `SELECT * FROM trainees WHERE fname = '${req.query.fname}' AND lname = '${req.query.lname}'`,
     (err, rows) => {
       if (err) res.status(409).send(false);
       else res.status(200).send(rows.length == 1 ? true : false);

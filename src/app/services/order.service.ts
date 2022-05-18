@@ -13,7 +13,7 @@ export class OrderService {
   getMenu() {
     let obs = new Observable<menu_item[]>((observer) => {
       this.http
-        .post<menu_item[]>('/get/menu', null, { observe: 'response' })
+        .get<menu_item[]>('/api/menu', { observe: 'response' })
         .subscribe({
           next: (data) => {
             observer.next(data.body!);

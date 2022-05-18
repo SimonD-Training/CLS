@@ -13,7 +13,7 @@ export class TraineeService {
   checkTrainee (person: trainee) {
     let obs = new Observable<boolean>((observer) => {
       this.http
-        .post<boolean>('/get/trainee', person, { observe: 'response' })
+        .get<boolean>(`/api/trainee?fname=${person.fname}&lname=${person.lname}`, { observe: 'response' })
         .subscribe({
           next: (data) => {
             observer.next(data.body!);
